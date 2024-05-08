@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    <title>Rock Paper Scissors</title>
+    <script>
+        function setChoice(choice) {
+            document.getElementById('symbol').value = choice;
+            document.getElementById('gameForm').submit();
+        }
+    </script>
+</head>
+<body>
+    <h1>!!!...Say, Rock Paper Scissors...!!!</h1>
+    <div class="container">
+        <form id="gameForm" action="/play" method="post">
+            <input type="hidden" name="symbol" id="symbol">
+            <div class="choices">
+                <img src="{{ url_for('static', filename='images/rock.jpg') }}" alt="Rock" onclick="setChoice('r')">
+                <img src="{{ url_for('static', filename='images/paper.jpg') }}" alt="Paper" onclick="setChoice('p')">
+                <img src="{{ url_for('static', filename='images/scissors.jpg') }}" alt="Scissors" onclick="setChoice('s')">
+                <button class='message' disabled>Choose Wisely, if you wanna WIN,,!</button>
+            </div>
+        </form>
+        <div class="results">
+            <div class="choice">
+                <p>Computer's Choice:</p>
+                <img class="computer_choice" src="{{ url_for('static', filename='images/' + session['cChoice'] + '.jpg') }}" alt="{{ session['cChoice'] }}">
+            </div>
+            <div class="choice">
+                <p>Your Choice:</p>
+                <img class="player_choice" src="{{ url_for('static', filename='images/' + session['pChoice'] + '.jpg') }}" alt="{{ session['pChoice'] }}">
+            </div>
+        </div>
+        <div class="score">
+            <button disabled>Computer Wins: {{ session.get('cPoints', 0) }}</button>
+            <button disabled>Ties: {{ session.get('tie', 0) }}</button>
+            <button disabled>Player Wins: {{ session.get('pPoints', 0) }}</button>
+        </div>
+    </div>
+</body>
+</html>

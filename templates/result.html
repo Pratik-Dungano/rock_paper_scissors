@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors - Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+</head>
+<body>
+    <h1>Game Result</h1>
+    <div class="container">
+        {% if winner == "Tie" %}
+            <p>!!!...<strong>{{ winner }}</strong>...!!!</p>
+            <img src="{{ url_for('static', filename='images/Tie.jpg') }}" alt="Player Wins">
+        {% elif winner == "Player" %}
+            <p>!!!...<strong>{{ winner }}</strong>   Wins...!!!</p>
+            <img src="{{ url_for('static', filename='images/computer_sad.jpg') }}" alt="Player Wins">
+        {% elif winner == "Computer" %}
+            <p>!!!...<strong>{{ winner }}</strong>   Wins...!!!</p>
+            <img src="{{ url_for('static', filename='images/computer_happy.jpg') }}" alt="Computer Wins">
+        {% endif %}
+        <div class="buttons">
+            <form action="/reset" method="POST">
+                <button type="submit">New Game</button>
+            </form>
+            <form action="/continue" method="POST">
+                <button type="submit">Continue</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
